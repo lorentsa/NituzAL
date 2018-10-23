@@ -1,8 +1,15 @@
 package sample;
 
 import java.util.Date;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Model implements IModel{
+
+    public Model() {
+
+    }
 
     @Override
     public void Create(String userName, String password, String firstName, String lastName, Date bithday, String city) {
