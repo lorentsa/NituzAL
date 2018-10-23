@@ -39,7 +39,7 @@
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Label layoutX="34.0" layoutY="24.0" text="Create user's form:">
+      <Label layoutX="34.0" layoutY="24.0" text="Update user's form:">
          <font>
             <Font size="36.0" />
          </font>
