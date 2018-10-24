@@ -10,13 +10,22 @@ import java.sql.*;
 
 public class Main extends Application {
 
+
+    /**
+     *
+     * @param primaryStage
+     * @throws Exception
+     * The function opens the view form.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        Parent root = FXMLLoader.load(getClass().getResource("View.fxml"));
+        primaryStage.setTitle("viewPage");
+        primaryStage.setScene(new Scene(root, 300, 400));
         primaryStage.show();
     }
+
+
     public static void connect() {
         Connection conn = null;
         try {
@@ -39,6 +48,9 @@ public class Main extends Application {
             }
         }
     }
+
+
+
     public static void createNewDatabase(String fileName) {
 
         String url = "jdbc:sqlite:" + fileName;
@@ -54,6 +66,9 @@ public class Main extends Application {
             System.out.println(e.getMessage());
         }
     }
+
+
+
     public static void createNewTable() {
         // SQLite connection string
         String url = "jdbc:sqlite:Users.db";
@@ -69,9 +84,6 @@ public class Main extends Application {
                 + "   birthdate text NOT NULL\n"
                 + ");";
 
-
-
-
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement()) {
             // create a new table
@@ -81,10 +93,11 @@ public class Main extends Application {
         }
     }
 
+
     public static void main(String[] args) {
         connect();
         createNewDatabase("Users.db");
         createNewTable();
-        //launch(args);
+        launch(args);
     }
 }
