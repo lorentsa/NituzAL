@@ -18,8 +18,23 @@ public class Model implements IModel{
     }
 
     @Override
-    public void Create(String userName, String password, String firstName, String lastName, Date bithday, String city) {
+    public boolean Create(String userName, String password, String firstName, String lastName, String birthday, String city) {
+        String sql = "INSERT INTO Users(user_name,password,first_name,last_name,city,birthdate) VALUES(?,?,?,?,?,?)";
 
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, userName);
+            pstmt.setString(2, password);
+            pstmt.setString(3, firstName);
+            pstmt.setString(4, lastName);
+            pstmt.setString(5, city);
+            pstmt.setString(6, birthday);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -35,11 +50,12 @@ public class Model implements IModel{
 
 
 
-    /**
+   /**
      * Connect to the Users.db database
      *
      * @return the Connection object
      */
+
     private Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:Users.db";
@@ -52,7 +68,30 @@ public class Model implements IModel{
         }
         return conn;
     }
+/**
+    public static void connect() {
+        Connection conn = null;
+        try {
+            // db parameters
+            String url = "jdbc:sqlite:";
+            // create a connection to the database
+            conn = DriverManager.getConnection(url);
 
+            System.out.println("Connection to SQLite has been established.");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+ **/
     @Override
     /**
      * Delete function get the strings username and password.
@@ -63,7 +102,7 @@ public class Model implements IModel{
 
             //String sql = "DELETE FROM Users WHERE user_name =" + userName + " AND password =" + Password;
             String sql = "DELETE FROM Users WHERE user_name = liron";
-
+        System.out.println("HI");
             try (Connection conn = this.connect();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -80,6 +119,5 @@ public class Model implements IModel{
                 System.out.println(e.getMessage());
             }
         }
-
 
     }

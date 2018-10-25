@@ -9,8 +9,6 @@ import javafx.stage.Stage;
 import java.sql.*;
 
 public class Main extends Application {
-
-
     /**
      *
      * @param primaryStage
@@ -19,10 +17,15 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("View.fxml"));
-        primaryStage.setTitle("viewPage");
-        primaryStage.setScene(new Scene(root, 300, 400));
-        primaryStage.show();
+        try {
+            Parent root = FXMLLoader.load(this.getClass().getResource("MainView.fxml"));
+            primaryStage.setTitle("Vacation4U");
+            primaryStage.setScene(new Scene(root, 300, 400));
+            primaryStage.show();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 
@@ -94,10 +97,12 @@ public class Main extends Application {
     }
 
 
+
     public static void main(String[] args) {
-        connect();
-        createNewDatabase("Users.db");
-        createNewTable();
+       // connect();
+       // createNewDatabase("Users.db");
+       // createNewTable();
+
         launch(args);
     }
 }
