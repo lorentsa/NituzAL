@@ -1,5 +1,7 @@
-package sample;
+package View;
 
+import Model.Model;
+import Model.IModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,10 +14,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
-import java.awt.*;
 import java.io.IOException;
 
-public class MainViewController {
+public class ViewController {
 
     private IModel theModel=new Model();
 
@@ -31,23 +32,47 @@ public class MainViewController {
      * opens the form to make new user
      */
 
-@FXML
-private void openCreateForm(ActionEvent event){
-    try{
-    FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Create.fxml"));
-    Parent root1 = (Parent) fxmlLoader.load();
-    Stage stage = new Stage();
-    stage.initModality(Modality.APPLICATION_MODAL);
-    stage.initStyle(StageStyle.UNDECORATED);
-    stage.setTitle("Create User");
-    stage.setScene(new Scene(root1));
-    stage.show();
-    }
-    catch (IOException e){
-        e.printStackTrace();
+    @FXML
+    private void openCreateForm(ActionEvent event){
+        try{
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Create.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setTitle("Create User");
+        stage.setScene(new Scene(root1));
+        stage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
 
-}
+    /**
+     *
+     * @param event
+     * the function opens the update form of the user
+     */
+    @FXML
+    private void openUpdateForm(ActionEvent event){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Update.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("Update User");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
     /**
      *
      * @param event by choosing the delete option in view.fxml

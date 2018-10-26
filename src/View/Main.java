@@ -1,5 +1,8 @@
-package sample;
+package View;
 
+import Controller.Controller;
+import Model.Model;
+import Model.IModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,8 +20,10 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
+//        IModel model = new Model();
+//        Controller controller = new Controller(model);
         try {
-            Parent root = FXMLLoader.load(this.getClass().getResource("MainView.fxml"));
+            Parent root = FXMLLoader.load(this.getClass().getResource("View.fxml"));
             primaryStage.setTitle("Vacation4U");
             primaryStage.setScene(new Scene(root, 300, 400));
             primaryStage.show();

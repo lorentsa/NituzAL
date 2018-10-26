@@ -1,17 +1,12 @@
-package sample;
+package Model;
 
-import com.sun.media.sound.SimpleSoundbank;
-
-import java.util.Date;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import java.sql.*;
 
-
-public class Model implements IModel{
+public class Model implements IModel {
 
     public Model() {
 
@@ -38,14 +33,43 @@ public class Model implements IModel{
     }
 
     @Override
-    public User Read(String userName) {
+    public String Read(String userName) {
         return null;
     }
 
-    @Override
-    public void Update(String userName, String password, String firstName, String lastName, Date bithday, String city) {
 
+    /**
+     * the function updates the details of an exists user
+     * @param userName
+     * @param password
+     * @param firstName
+     * @param lastName
+     * @param birthday
+     * @param city
+     */
+    @Override
+    public void Update(String userName, String password, String firstName, String lastName, String birthday, String city) {
+        String sql = "UPDATE Users SET user_name = ? , " + "password = ? " + "first_name = ?" + "last_name = ?" +
+                "city = ?" + "birthdate = ?" +"WHERE username = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            pstmt.setString(1, userName);
+            pstmt.setString(2, password);
+            pstmt.setString(3, firstName);
+            pstmt.setString(4, lastName);
+            pstmt.setString(5, birthday);
+            pstmt.setString(6, city);
+            // update
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
+
+
 
 
 
