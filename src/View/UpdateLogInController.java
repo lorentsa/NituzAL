@@ -1,10 +1,13 @@
 package View;
 
+import Controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -13,11 +16,13 @@ import java.awt.*;
 import java.io.IOException;
 
 public class UpdateLogInController {
-    @FXML
-    private TextField username;
 
     @FXML
-    private TextField password;
+    private javafx.scene.control.TextField username;
+    @FXML
+    private PasswordField passwordField;
+
+    private Controller controller = new Controller();
 
     @FXML
     private Button logIn;
@@ -43,4 +48,7 @@ public class UpdateLogInController {
         }
 
     }
+
+    
+
 }
