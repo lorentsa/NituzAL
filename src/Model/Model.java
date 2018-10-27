@@ -1,9 +1,8 @@
 package Model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Queue;
+import java.util.Vector;
 
 
 public class Model implements IModel {
@@ -33,9 +32,41 @@ public class Model implements IModel {
     }
 
     @Override
-    public String Read(String userName) {
-        return null;
+    public Vector<String> Read(String userName) {
+        String sql = "SELECT user_name, password, first_name, last_name, city, birthdate FROM Users WHERE user_name = ? ";
+        Vector<String> ans = new Vector<>();
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the value
+            pstmt.setString(1, userName);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                for (int i = 1; i <=6  ; i++) {
+                    ans.add(rs.getString(i));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return ans;
     }
+
+
+        /**        String sql = "SELECT user_name FROM Users WHERE user_name=?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // set the corresponding param
+            pstmt.setString(1, userName);
+
+            System.out.println("dfdf "+pstmt.getResultSet().getString("user_name")+"Sdsf");
+            return "";
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return "----";
+        }**/
+//    }
 
 
     /**
@@ -68,11 +99,6 @@ public class Model implements IModel {
             System.out.println(e.getMessage());
         }
     }
-
-
-
-
-
 
    /**
      * Connect to the Users.db database
