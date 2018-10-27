@@ -55,7 +55,40 @@ public class Controller {
         }
     }
 
+
     public Vector<String>Read(String username) {
         return model.Read(username);
+}
+=======
+
+    public Alert Delete(String DeleteUserNameOutput, String DeletePasswordOutput) {
+        if (DeleteUserNameOutput.length() == 0 || DeletePasswordOutput.length() == 0) {
+            //if one or more deails aren't filled
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setHeaderText("Input not valid");
+            errorAlert.setContentText("At least one of the fields are empty.\nFill all fields and try again ");
+            return errorAlert;
+        } else {
+
+
+            boolean flag = model.Delete(DeleteUserNameOutput, DeletePasswordOutput);
+            if (flag) {
+                Alert success = new Alert(Alert.AlertType.CONFIRMATION);
+                success.setHeaderText("Action Succeeded");
+                success.setContentText("New user created successfuly! ");
+//                    success.showAndWait();
+                return success;
+
+            }
+            else
+            {
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setHeaderText("Action failed");
+                errorAlert.setContentText("Doen't success to connect to the DB ");
+                return errorAlert;
+            }
+
+        }
     }
 }
+

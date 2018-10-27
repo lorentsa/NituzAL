@@ -16,17 +16,11 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class ViewController {
+public class ViewController  {
 
-    private IModel theModel=new Model();
 
-    @FXML
-    private TextField DeleteUserNameOutput;
-    @FXML
-    private PasswordField DeletePasswordOutput;
 
-    /**
-     *
+     /**
      * @param event
      * @throws IOException
      * opens the form to make new user
@@ -104,6 +98,8 @@ public class ViewController {
             stage.setTitle("DeleteForm");
             stage.setScene(new Scene(root1));
             stage.show();
+
+
         }
         catch(IOException e){
             e.printStackTrace();
@@ -113,14 +109,6 @@ public class ViewController {
 
     }
 
-    /**
-     * @param event - by choosing "delete" in Delete.fxml
-     *              this function connect controller and model.
-     */
-    @FXML
-    private void deleteUser(ActionEvent event)
-    {
-        theModel.Delete(DeleteUserNameOutput.getText(), DeletePasswordOutput.getText());
-    }
+
 
 }
