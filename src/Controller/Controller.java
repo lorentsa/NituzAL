@@ -59,7 +59,6 @@ public class Controller {
     public Vector<String>Read(String username) {
         return model.Read(username);
 }
-=======
 
     public Alert Delete(String DeleteUserNameOutput, String DeletePasswordOutput) {
         if (DeleteUserNameOutput.length() == 0 || DeletePasswordOutput.length() == 0) {

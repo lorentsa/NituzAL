@@ -29,12 +29,12 @@ public class ViewController  {
     private void openCreateForm(ActionEvent event){
         try{
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Create.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
+        Parent root1 = (Parent) fxmlLoader.load(this.getClass().getResource("Create.fxml"));
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
+        //stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Create User");
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root1,410,390));
         stage.show();
         }
         catch (IOException e){
@@ -71,7 +71,7 @@ public class ViewController  {
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
+            //stage.initStyle(StageStyle.UNDECORATED);
             stage.setTitle("Update User");
             stage.setScene(new Scene(root1));
             stage.show();
@@ -94,7 +94,7 @@ public class ViewController  {
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
+            //stage.initStyle(StageStyle.UNDECORATED);
             stage.setTitle("DeleteForm");
             stage.setScene(new Scene(root1));
             stage.show();

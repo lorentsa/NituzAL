@@ -111,7 +111,7 @@ public class Model implements IModel {
      *
      * @return the Connection object
      */
-
+/**
     private Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:Users.db";
@@ -124,6 +124,7 @@ public class Model implements IModel {
         }
         return conn;
     }
+ **/
 /**
     public static void connect() {
         Connection conn = null;
