@@ -3,7 +3,13 @@ package Controller;
 import Model.IModel;
 import Model.Model;
 import View.ViewController;
+import javafx.beans.property.StringProperty;
 import javafx.scene.control.Alert;
+
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Queue;
+import java.util.Vector;
 
 public class Controller {
     IModel model = new Model();
@@ -50,6 +56,11 @@ public class Controller {
     }
 
 
+    public Vector<String>Read(String username) {
+        return model.Read(username);
+}
+=======
+
     public Alert Delete(String DeleteUserNameOutput, String DeletePasswordOutput) {
         if (DeleteUserNameOutput.length() == 0 || DeletePasswordOutput.length() == 0) {
             //if one or more deails aren't filled
@@ -78,7 +89,6 @@ public class Controller {
             }
 
         }
-
     }
 }
 

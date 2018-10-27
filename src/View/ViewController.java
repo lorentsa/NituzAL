@@ -25,7 +25,6 @@ public class ViewController  {
      * @throws IOException
      * opens the form to make new user
      */
-
     @FXML
     private void openCreateForm(ActionEvent event){
         try{
@@ -42,6 +41,22 @@ public class ViewController  {
             e.printStackTrace();
         }
 
+    }
+
+
+  
+    @FXML
+    private void openReadForm(){
+        try{
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(this.getClass().getResource("Read.fxml"));
+            stage.setTitle("Vacation4U - Read");
+            stage.setScene(new Scene(root, 300, 500));
+            stage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     /**

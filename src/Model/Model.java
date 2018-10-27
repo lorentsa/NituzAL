@@ -1,9 +1,8 @@
 package Model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Queue;
+import java.util.Vector;
 
 
 public class Model implements IModel {
@@ -52,8 +51,24 @@ public class Model implements IModel {
     }
 
     @Override
-    public String Read(String userName) {
-        return null;
+    public Vector<String> Read(String userName) {
+        String sql = "SELECT user_name, password, first_name, last_name, city, birthdate FROM Users WHERE user_name = ? ";
+        Vector<String> ans = new Vector<>();
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the value
+            pstmt.setString(1, userName);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                for (int i = 1; i <=6  ; i++) {
+                    ans.add(rs.getString(i));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return ans;
     }
 
     /**
@@ -90,6 +105,49 @@ public class Model implements IModel {
         }
     }
 
+
+   /**
+     * Connect to the Users.db database
+     *
+     * @return the Connection object
+     */
+
+    private Connection connect() {
+        // SQLite connection string
+        String url = "jdbc:sqlite:Users.db";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+            System.out.println("connect");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }
+/**
+    public static void connect() {
+        Connection conn = null;
+        try {
+            // db parameters
+            String url = "jdbc:sqlite:";
+            // create a connection to the database
+            conn = DriverManager.getConnection(url);
+
+            System.out.println("Connection to SQLite has been established.");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+ **/
 
     @Override
     /**
