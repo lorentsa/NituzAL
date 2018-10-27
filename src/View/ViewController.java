@@ -50,12 +50,7 @@ public class ViewController {
     }
 
 
-    /**
-     *
-     * @param event
-     * @throws IOException
-     * opens the form to make new user
-     */
+  
     @FXML
     private void openReadForm(){
         try{
