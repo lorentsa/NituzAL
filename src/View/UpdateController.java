@@ -1,43 +1,80 @@
 package View;
 
+import Controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
+import java.util.Vector;
 
 public class UpdateController {
-
+    @FXML
+    private TextField usernameLogIn;
+    @FXML
+    private GridPane resultsView;
     @FXML
     private TextField username;
     @FXML
     private PasswordField password;
     @FXML
-    private TextField firstName;
+    private TextField firstname;
     @FXML
-    private TextField lastName;
+    private TextField lastname;
     @FXML
     private TextField city;
     @FXML
-    private DatePicker birthdate ;
+    private TextField birthdate;
     @FXML
-    public Button closeButton; //todo add the close button of windows
+    private Label sorrymessage;
 
-    /**
-     * the function insert the relevant data to the fields and call the appropriate method in the model
+    private Controller controller = new Controller();
 
-     */
-    public void updateUser(ActionEvent event) throws IOException{
-        String usernameS,passwordS,confirmS,firstS,lastS,cityS,dateS;
+    @FXML
+    private void FindUser(ActionEvent event) throws IOException {
+        String usernameS;
+        usernameS = usernameLogIn.getText();
+        Vector<String> ans = controller.Read(usernameS);
+        sorrymessage.setVisible(false);
+        resultsView.setVisible(false);
+        if (ans.size() != 0) {
+            username.setText(ans.elementAt(0));
+            password.setText(ans.elementAt(1));
+            firstname.setText(ans.elementAt(2));
+            lastname.setText(ans.elementAt(3));
+            city.setText(ans.elementAt(4));
+            birthdate.setText(ans.elementAt(5));
+            resultsView.setVisible(true);
+        } else {
+            sorrymessage.setVisible(true);
+        }
+    }
+
+    @FXML
+    public void onEnter(ActionEvent ae){
+        try {
+            FindUser(ae);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(ActionEvent actionEvent) {
+        String usernameS,passwordS,firstnameS,lastnameS,birthdateS,cityS;
+        usernameS=username.getText();
         passwordS=password.getText();
-        usernameS = username.getText();
-        firstS = firstName.getText();
-        lastS = lastName.getText();
-        cityS = city.getText();
-        dateS = birthdate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        firstnameS=firstname.getText();
+        lastnameS=lastname.getText();
+        birthdateS=birthdate.getText();
+        cityS=city.getText();
+        controller.update(usernameS,passwordS,firstnameS,lastnameS,birthdateS,cityS);
     }
 }
