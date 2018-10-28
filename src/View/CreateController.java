@@ -57,11 +57,4 @@ public class CreateController {
         alert.showAndWait();
     }
 
-
-
-    @FXML
-    public void handleCloseButtonAction(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
-    }
 }
