@@ -84,25 +84,27 @@ public class Model implements IModel {
 
 
     @Override
-    public void Update(String userName, String password, String firstName, String lastName, String birthday, String city) {
-        String sql = "UPDATE Users SET user_name = ? , " + "password = ? " + "first_name = ?" + "last_name = ?" +
-                "city = ?" + "birthdate = ?" + "WHERE username = ?";
+    public boolean Update(String userName, String password, String firstName, String lastName, String birthday, String city) {
+        String sql = "UPDATE Users SET password = ? ,first_name = ? ,last_name = ? ,birthdate = ? ,city = ? WHERE user_name = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             // set the corresponding param
-            pstmt.setString(1, userName);
-            pstmt.setString(2, password);
-            pstmt.setString(3, firstName);
-            pstmt.setString(4, lastName);
-            pstmt.setString(5, birthday);
-            pstmt.setString(6, city);
+//            pstmt.setString(1, userName);
+            pstmt.setString(1, password);
+            pstmt.setString(2, firstName);
+            pstmt.setString(3, lastName);
+            pstmt.setString(4, birthday);
+            pstmt.setString(5, city);
+            pstmt.setString(6, userName);
             // update
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         }
+        return true;
     }
 
 
